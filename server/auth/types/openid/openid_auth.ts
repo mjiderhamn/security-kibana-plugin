@@ -144,7 +144,7 @@ export class OpenIdAuthentication extends AuthenticationType {
   }
 
   getCookie(request: KibanaRequest, authInfo: any): SecuritySessionCookie {
-    return {
+    const output = {
       username: authInfo.user_name,
       credentials: {
         authHeaderValue: request.headers.authorization,
@@ -152,6 +152,8 @@ export class OpenIdAuthentication extends AuthenticationType {
       authType: this.type,
       expiryTime: Date.now() + this.config.session.ttl,
     };
+    this.logger.debug('OpenIdAuthConfig.getCookie(): output = ' + JSON.stringify(output));
+    return output;
   }
 
   // TODO: Add token expiration check here
@@ -229,6 +231,7 @@ export class OpenIdAuthentication extends AuthenticationType {
   buildAuthHeaderFromCookie(cookie: SecuritySessionCookie): any {
     const header: any = {};
     const authHeaderValue = cookie.credentials?.authHeaderValue;
+    this.logger.debug('OpenIdAuthConfig.buildAuthHeaderFromCookie(): authHeaderValue = ' + authHeaderValue);
     if (authHeaderValue) {
       header.authorization = authHeaderValue;
     }
