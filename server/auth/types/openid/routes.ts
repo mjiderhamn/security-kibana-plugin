@@ -113,6 +113,7 @@ export class OpenIdAuthRoutes {
         let cookie;
         try {
           cookie = await this.sessionStorageFactory.asScoped(request).get();
+          context.security_plugin.logger.debug('OpenIdAuthConfig: cookie = ' + JSON.stringify(cookie));
           if (
             !cookie ||
             !cookie.oidc?.state ||
@@ -141,6 +142,7 @@ export class OpenIdAuthRoutes {
             query,
             this.wreckClient
           );
+          context.security_plugin.logger.debug('OpenIdAuthConfig: tokenResponse = ' + JSON.stringify(tokenResponse));
 
           const user = await this.securityClient.authenticateWithHeader(
             request,
