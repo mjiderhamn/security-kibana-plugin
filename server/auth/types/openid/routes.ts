@@ -113,7 +113,7 @@ export class OpenIdAuthRoutes {
         let cookie;
         try {
           cookie = await this.sessionStorageFactory.asScoped(request).get();
-          context.security_plugin.logger.debug('OpenIdAuthConfig: cookie = ' + JSON.stringify(cookie));
+          // context.security_plugin.logger.debug('OpenIdAuthConfig: cookie = ' + JSON.stringify(cookie));
           if (
             !cookie ||
             !cookie.oidc?.state ||

@@ -231,7 +231,7 @@ export class OpenIdAuthentication extends AuthenticationType {
   buildAuthHeaderFromCookie(cookie: SecuritySessionCookie): any {
     const header: any = {};
     const authHeaderValue = cookie.credentials?.authHeaderValue;
-    this.logger.debug('OpenIdAuthConfig.buildAuthHeaderFromCookie(): authHeaderValue = ' + authHeaderValue);
+    // this.logger.debug('OpenIdAuthConfig.buildAuthHeaderFromCookie(): authHeaderValue = ' + authHeaderValue);
     if (authHeaderValue) {
       header.authorization = authHeaderValue;
     }
